@@ -1,0 +1,26 @@
+name: Setup Go with tool-versions
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  setup-go:
+    runs-on: [self-hosted, linux, arm64]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Go from .tool-versions
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: '.tool-versions'
+
+      - name: Verify Go installation
+        run: |
+          go version
+          echo "Go installed successfully!"
