@@ -9,7 +9,15 @@ on:
 
 jobs:
   setup-go:
-    runs-on: ubuntu-24.04-arm
+    strategy:
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-24-04
+          - ubuntu-24-04-arm
+          - ubuntu-latest
+          - windows-latest
+    runs-on: ${{ matrix.os }}
     permissions:
       contents: read
 
